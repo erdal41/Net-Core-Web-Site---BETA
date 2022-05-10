@@ -1,0 +1,377 @@
+﻿@model MySite.Entities.Dtos.UserUpdateDto
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Kullanıcı Düzenle";
+}
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+
+    <div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
+        <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+            <!--begin::Info-->
+            <div class="d-flex align-items-center flex-wrap mr-1">
+                <!--begin::Page Heading-->
+                <div class="d-flex align-items-baseline flex-wrap mr-5">
+                    <!--begin::Page Title-->
+                    <h1 class="text-dark font-weight-bold my-1 mr-5">@ViewBag.Title</h1>
+                    <!--end::Page Title-->
+                    <!--begin::Breadcrumb-->
+                    <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+                        <li class="breadcrumb-item text-muted">
+                            <a asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a>
+                        </li>
+                        <li class="breadcrumb-item text-muted">
+                            <a asp-area="Admin" asp-controller="Kullanici" asp-action="Index">Kullanıcılar</a>
+                        </li>
+                        <li class="breadcrumb-item text-muted">
+                            <a asp-area="Admin" asp-controller="Kullanici" asp-action="Duzenle" asp-route-userId="@Model.Id">@ViewBag.Title</a>
+                        </li>
+                    </ul>
+                    <!--end::Breadcrumb-->
+                </div>
+                <!--end::Page Heading-->
+            </div>
+            <!--end::Info-->
+        </div>
+    </div>
+
+    <div class="d-flex flex-column-fluid">
+        <div class="container">
+            <div class="card card-custom">
+                <div class="card-body p-0">
+                    <!--begin::Wizard-->
+                    <div class="wizard wizard-2" id="kt_wizard" data-wizard-state="first" data-wizard-clickable="true">
+                        <!--begin::Wizard Nav-->
+                        <div class="wizard-nav border-right py-8 px-8 py-lg-20 px-lg-10">
+                            <div class="wizard-steps">
+                                <div class="wizard-step" data-wizard-type="step" data-wizard-state="current">
+                                    <div class="wizard-wrapper">
+                                        <div class="wizard-icon">
+                                            <span class="svg-icon svg-icon-2x">
+                                                <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/General/User.svg-->
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                                                        <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+                                                        <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero"></path>
+                                                    </g>
+                                                </svg>
+                                                <!--end::Svg Icon-->
+                                            </span>
+                                        </div>
+                                        <div class="wizard-label">
+                                            <div class="wizard-title">Profil</div>
+                                            <div class="wizard-desc">Kullanıcının kişisel bilgileri</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wizard-step" data-wizard-type="step">
+                                    <div class="wizard-wrapper">
+                                        <div class="wizard-icon">
+                                            <span class="svg-icon svg-icon-2x">
+                                                <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-03-11-144509/theme/html/demo1/dist/../src/media/svg/icons/General/Star.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <polygon points="0 0 24 0 24 24 0 24" />
+                                                        <path d="M12,18 L7.91561963,20.1472858 C7.42677504,20.4042866 6.82214789,20.2163401 6.56514708,19.7274955 C6.46280801,19.5328351 6.42749334,19.309867 6.46467018,19.0931094 L7.24471742,14.545085 L3.94038429,11.3241562 C3.54490071,10.938655 3.5368084,10.3055417 3.92230962,9.91005817 C4.07581822,9.75257453 4.27696063,9.65008735 4.49459766,9.61846284 L9.06107374,8.95491503 L11.1032639,4.81698575 C11.3476862,4.32173209 11.9473121,4.11839309 12.4425657,4.36281539 C12.6397783,4.46014562 12.7994058,4.61977315 12.8967361,4.81698575 L14.9389263,8.95491503 L19.5054023,9.61846284 C20.0519472,9.69788046 20.4306287,10.2053233 20.351211,10.7518682 C20.3195865,10.9695052 20.2170993,11.1706476 20.0596157,11.3241562 L16.7552826,14.545085 L17.5353298,19.0931094 C17.6286908,19.6374458 17.263103,20.1544017 16.7187666,20.2477627 C16.5020089,20.2849396 16.2790408,20.2496249 16.0843804,20.1472858 L12,18 Z" fill="#000000" />
+                                                    </g>
+                                                </svg><!--end::Svg Icon-->
+                                            </span>
+                                        </div>
+                                        <div class="wizard-label">
+                                            <div class="wizard-title">Sosyal Medya</div>
+                                            <div class="wizard-desc">Sosyal medya bilgileri</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end::Wizard Nav-->
+                        <!--begin::Body-->
+                        <div class="wizard-body py-8 px-8 py-lg-20 px-lg-10">
+                            <div class="row">
+                                <div class="offset-xxl-2 col-xxl-8">
+                                    <!--begin::Wizard Form-->
+                                    <form class="form fv-plugins-bootstrap fv-plugins-framework" id="kt_form" asp-controller="Kullanici" asp-action="Duzenle" method="post" enctype="multipart/form-data">
+                                        <div class="row justify-content-center">
+                                            <input type="hidden" asp-for="Id" />
+                                            <div asp-validation-summary="All"></div>
+                                            <input name="IsValid" type="hidden" value="@ViewData.ModelState.IsValid.ToString()" />
+                                            <div class="col-xl-9">
+                                                <!--begin::Wizard Step 1-->
+                                                <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
+                                                    <h2 class="mb-10 font-weight-bold text-dark">Kişisel Bilgiler</h2>
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label text-left">Resim</label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            <div class="image-input image-input-outline" id="kt_user_add_avatar">
+                                                                <div class="image-input-wrapper" style="background-image:url(/img/@Model.Picture)" alt="@Model.UserName"></div>
+                                                                <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Resmi Değiştir">
+                                                                    <i class="fa fa-pen icon-sm text-muted"></i>
+                                                                    <input type="file" class="form-control-file" accept=".png, .jpg, .jpeg" asp-for="Picture" />
+                                                                    <input asp-for="Picture" type="hidden" />
+                                                                    <input type="hidden" name="profile_avatar_remove" />
+                                                                    <span class="text-danger" asp-validation-for="Picture"></span>
+                                                                </label>
+                                                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Resmi Sil">
+                                                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Kullanıcı Adı</label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            <input class="form-control form-control-solid form-control-lg" type="text" name="username" asp-for="UserName" />
+                                                            <span class="form-text text-muted">Kullanıcı adınızı giriniz.</span>
+                                                            <span class="text-danger" asp-validation-for="UserName"></span>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Ad</label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            <input class="form-control form-control-solid form-control-lg" type="text" name="firstname" asp-for="FirstName" />
+                                                            <span class="form-text text-muted">Adınızı giriniz.</span>
+                                                            <span class="text-danger" asp-validation-for="FirstName"></span>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Soyad</label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            <input class="form-control form-control-solid form-control-lg" name="lastname" type="text" asp-for="LastName" />
+                                                            <span class="form-text text-muted">Soyadınızı giriniz.</span>
+                                                            <span class="text-danger" asp-validation-for="LastName"></span>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Telefon</label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            <div class="input-group input-group-solid input-group-lg">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="svg-icon svg-icon-md">
+                                                                            <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-03-11-144509/theme/html/demo1/dist/../src/media/svg/icons/Communication/Call.svg-->
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                                    <rect x="0" y="0" width="24" height="24" />
+                                                                                    <path d="M12,22 C6.4771525,22 2,17.5228475 2,12 C2,6.4771525 6.4771525,2 12,2 C17.5228475,2 22,6.4771525 22,12 C22,17.5228475 17.5228475,22 12,22 Z M11.613922,13.2130341 C11.1688026,13.6581534 10.4887934,13.7685037 9.92575695,13.4869855 C9.36272054,13.2054673 8.68271128,13.3158176 8.23759191,13.760937 L6.72658218,15.2719467 C6.67169475,15.3268342 6.63034033,15.393747 6.60579393,15.4673862 C6.51847004,15.7293579 6.66005003,16.0125179 6.92202169,16.0998418 L8.27584113,16.5511149 C9.57592638,16.9844767 11.009274,16.6461092 11.9783003,15.6770829 L15.9775173,11.6778659 C16.867756,10.7876271 17.0884566,9.42760861 16.5254202,8.3015358 L15.8928491,7.03639343 C15.8688153,6.98832598 15.8371895,6.9444475 15.7991889,6.90644684 C15.6039267,6.71118469 15.2873442,6.71118469 15.0920821,6.90644684 L13.4995401,8.49898884 C13.0544207,8.94410821 12.9440704,9.62411747 13.2255886,10.1871539 C13.5071068,10.7501903 13.3967565,11.4301996 12.9516371,11.8753189 L11.613922,13.2130341 Z" fill="#000000" />
+                                                                                </g>
+                                                                            </svg><!--end::Svg Icon-->
+                                                                        </span>
+                                                                    </span>
+                                                                </div>
+                                                                <input type="text" class="form-control form-control-solid form-control-lg" asp-for="PhoneNumber" />
+                                                            </div>
+                                                            <span class="form-text text-muted">Geçerli bir telefon numarası giriniz.(Örneğin: 5678967456)</span>
+                                                            <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">E-Posta Adresi</label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            <div class="input-group input-group-solid input-group-lg">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <span class="svg-icon svg-icon-md">
+                                                                            <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-03-11-144509/theme/html/demo1/dist/../src/media/svg/icons/Communication/Mail-at.svg-->
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                                    <rect x="0" y="0" width="24" height="24" />
+                                                                                    <path d="M11.575,21.2 C6.175,21.2 2.85,17.4 2.85,12.575 C2.85,6.875 7.375,3.05 12.525,3.05 C17.45,3.05 21.125,6.075 21.125,10.85 C21.125,15.2 18.825,16.925 16.525,16.925 C15.4,16.925 14.475,16.4 14.075,15.65 C13.3,16.4 12.125,16.875 11,16.875 C8.25,16.875 6.85,14.925 6.85,12.575 C6.85,9.55 9.05,7.1 12.275,7.1 C13.2,7.1 13.95,7.35 14.525,7.775 L14.625,7.35 L17,7.35 L15.825,12.85 C15.6,13.95 15.85,14.825 16.925,14.825 C18.25,14.825 19.025,13.725 19.025,10.8 C19.025,6.9 15.95,5.075 12.5,5.075 C8.625,5.075 5.05,7.75 5.05,12.575 C5.05,16.525 7.575,19.1 11.575,19.1 C13.075,19.1 14.625,18.775 15.975,18.075 L16.8,20.1 C15.25,20.8 13.2,21.2 11.575,21.2 Z M11.4,14.525 C12.05,14.525 12.7,14.35 13.225,13.825 L14.025,10.125 C13.575,9.65 12.925,9.425 12.3,9.425 C10.65,9.425 9.45,10.7 9.45,12.375 C9.45,13.675 10.075,14.525 11.4,14.525 Z" fill="#000000" />
+                                                                                </g>
+                                                                            </svg><!--end::Svg Icon-->
+                                                                        </span>
+                                                                    </span>
+                                                                </div>
+                                                                <input type="text" class="form-control form-control-solid form-control-lg" name="email" asp-for="Email" />
+                                                            </div>
+                                                            <span class="form-text text-muted">Geçerli bir mail adresi giriniz.(Örneğin:ornek@mail.com)</span>
+                                                            <span class="text-danger" asp-validation-for="Email"></span>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Web Site</label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            <div class="input-group input-group-solid input-group-lg">
+                                                                <input type="text" class="form-control form-control-solid form-control-lg" name="websiteLink" asp-for="WebsiteLink" />
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text">.com</span>
+                                                                </div>
+                                                            </div>
+                                                            <span class="form-text text-muted">Geçerli bir web site adresi giriniz.(Örneğin:ornek.com)</span>
+                                                            <span class="text-danger" asp-validation-for="WebsiteLink"></span>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Hakkında</label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            <textarea class="form-control form-control-solid form-control-lg" name="about" asp-for="About"></textarea>
+                                                            <span class="form-text text-muted">Kısaca kendinizden bahsediniz.</span>
+                                                            <span class="text-danger" asp-validation-for="About"></span>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+                                                </div>
+                                                <!--end::Wizard Step 1-->
+                                                <!--begin::Wizard Step 2-->
+                                                <div class="pb-5" data-wizard-type="step-content">
+                                                    <h2 class="mb-10 font-weight-bold text-dark">Sosyal Medya Ayarları</h2>
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Facebook</label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            <input class="form-control form-control-solid form-control-lg" name="facebookLink" type="text" asp-for="FacebookLink" />
+                                                            <span class="form-text text-muted">Facebook adresinizi giriniz.</span>
+                                                            <span class="text-danger" asp-validation-for="FacebookLink"></span>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Twitter</label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            <input class="form-control form-control-solid form-control-lg" name="twitterLink" type="text" asp-for="TwitterLink" />
+                                                            <span class="form-text text-muted">Twitter adresinizi giriniz.</span>
+                                                            <span class="text-danger" asp-validation-for="TwitterLink"></span>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Instagram</label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            <input class="form-control form-control-solid form-control-lg" name="instagramLink" type="text" asp-for="InstagramLink" />
+                                                            <span class="form-text text-muted">Instagram adresinizi giriniz.</span>
+                                                            <span class="text-danger" asp-validation-for="InstagramLink"></span>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">LinkedIn</label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            <input class="form-control form-control-solid form-control-lg" name="linkedInLink" type="text" asp-for="LinkedInLink" />
+                                                            <span class="form-text text-muted">LinkedIn adresinizi giriniz.</span>
+                                                            <span class="text-danger" asp-validation-for="LinkedInLink"></span>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Youtube</label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            <input class="form-control form-control-solid form-control-lg" name="youtubeLink" type="text" asp-for="YoutubeLink" />
+                                                            <span class="form-text text-muted">Youtube adresinizi giriniz.</span>
+                                                            <span class="text-danger" asp-validation-for="YoutubeLink"></span>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">GitHub</label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            <input class="form-control form-control-solid form-control-lg" name="gitHubLink" type="text" asp-for="GitHubLink" />
+                                                            <span class="form-text text-muted">GitHub adresinizi giriniz.</span>
+                                                            <span class="text-danger" asp-validation-for="GitHubLink"></span>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+
+                                                </div>
+                                                <!--end::Wizard Step 2-->
+                                                <!--begin::Wizard Actions-->
+                                                <div class="d-flex justify-content-between border-top pt-10 mt-15">
+                                                    <div class="mr-2">
+                                                        <button type="button" id="prev-step" class="btn btn-light-primary font-weight-bolder px-9 py-4" data-wizard-type="action-prev">
+                                                            <span class="svg-icon svg-icon-md">
+                                                                <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-03-11-144509/theme/html/demo1/dist/../src/media/svg/icons/Navigation/Angle-left.svg-->
+                                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                        <polygon points="0 0 24 0 24 24 0 24" />
+                                                                        <path d="M6.70710678,15.7071068 C6.31658249,16.0976311 5.68341751,16.0976311 5.29289322,15.7071068 C4.90236893,15.3165825 4.90236893,14.6834175 5.29289322,14.2928932 L11.2928932,8.29289322 C11.6714722,7.91431428 12.2810586,7.90106866 12.6757246,8.26284586 L18.6757246,13.7628459 C19.0828436,14.1360383 19.1103465,14.7686056 18.7371541,15.1757246 C18.3639617,15.5828436 17.7313944,15.6103465 17.3242754,15.2371541 L12.0300757,10.3841378 L6.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" transform="translate(12.000003, 11.999999) scale(-1, 1) rotate(-270.000000) translate(-12.000003, -11.999999) " />
+                                                                    </g>
+                                                                </svg><!--end::Svg Icon-->
+                                                            </span>Önceki
+                                                        </button>
+                                                    </div>
+                                                    <div>
+                                                        <button type="submit" class="btn btn-success font-weight-bolder px-9 py-4" data-wizard-type="action-submit">
+                                                            <span class="svg-icon svg-icon-md">
+                                                                <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-03-11-144509/theme/html/demo1/dist/../src/media/svg/icons/General/Save.svg-->
+                                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                        <polygon points="0 0 24 0 24 24 0 24" />
+                                                                        <path d="M17,4 L6,4 C4.79111111,4 4,4.7 4,6 L4,18 C4,19.3 4.79111111,20 6,20 L18,20 C19.2,20 20,19.3 20,18 L20,7.20710678 C20,7.07449854 19.9473216,6.94732158 19.8535534,6.85355339 L17,4 Z M17,11 L7,11 L7,4 L17,4 L17,11 Z" fill="#000000" fill-rule="nonzero" />
+                                                                        <rect fill="#000000" opacity="0.3" x="12" y="4" width="3" height="5" rx="0.5" />
+                                                                    </g>
+                                                                </svg><!--end::Svg Icon-->
+                                                            </span>Kaydet
+                                                        </button>
+                                                        <button type="button" id="next-step" class="btn btn-primary font-weight-bolder px-9 py-4" data-wizard-type="action-next">
+                                                            Sonraki
+                                                            <span class="svg-icon svg-icon-md">
+                                                                <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-03-11-144509/theme/html/demo1/dist/../src/media/svg/icons/Navigation/Angle-right.svg-->
+                                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                        <polygon points="0 0 24 0 24 24 0 24" />
+                                                                        <path d="M6.70710678,15.7071068 C6.31658249,16.0976311 5.68341751,16.0976311 5.29289322,15.7071068 C4.90236893,15.3165825 4.90236893,14.6834175 5.29289322,14.2928932 L11.2928932,8.29289322 C11.6714722,7.91431428 12.2810586,7.90106866 12.6757246,8.26284586 L18.6757246,13.7628459 C19.0828436,14.1360383 19.1103465,14.7686056 18.7371541,15.1757246 C18.3639617,15.5828436 17.7313944,15.6103465 17.3242754,15.2371541 L12.0300757,10.3841378 L6.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" transform="translate(12.000003, 11.999999) rotate(-270.000000) translate(-12.000003, -11.999999) " />
+                                                                    </g>
+                                                                </svg><!--end::Svg Icon-->
+                                                            </span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <!--end::Wizard Actions-->
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!--end::Wizard Form-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end::Wizard-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.23.0/trumbowyg.min.js" integrity="sha512-sffB9/tXFFTwradcJHhojkhmrCj0hWeaz8M05Aaap5/vlYBfLx5Y7woKi6y0NrqVNgben6OIANTGGlojPTQGEw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.23.0/langs/tr.min.js" integrity="sha512-+HGzdrYvtA0U9cp5kJad8OpjTvUi6ywZ9z9kXFGiV3EaAR1II5X6lfulUm6/F9GKesHW+jHFfAqwXK0juybvMw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.23.0/plugins/colors/trumbowyg.colors.min.js" integrity="sha512-iT7g30i1//3OBZsfoc5XmlULnKQKyxir582Z9fIFWI6+ohfrTdns118QYhCTt0d09aRGcE7IRvCFjw2wngaqRQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.23.0/plugins/emoji/trumbowyg.emoji.min.js" integrity="sha512-C1y8Ma4rukPZAgoB+9AWiKNMWXvWXGDygpcYuL/lM3YKUcZLUgFwF8brKYML73a5YeZ4y7hmY3604Tzx4f4k0Q==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.23.0/plugins/fontfamily/trumbowyg.fontfamily.min.js" integrity="sha512-tDDpWlhruXFSzPin7PeSOo/ZklJv354ZUibgoTnthgO9lQUiNn4etCFGNwT4c3WUCZ1jWZgOVrXGMqiApe9sBg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.23.0/plugins/fontsize/trumbowyg.fontsize.min.js" integrity="sha512-DOJaq3OCe5hLSr73aQBMiJY4kc+L5UwessOl6g2oxyy7VDnZVWt+TgWVy2nh2ypf7bwoaxZmPnIMiRC5PNZecA==" crossorigin="anonymous"></script>
+    @*<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous"></script>
+
+    <script src="~/admin/assets/js/custom/user/add-user.js"></script>
+    <script src="~/admin/assets/js/custom/wizard/wizard-4.js"></script>
+    <script src="~/admin/assets/js/forms/select2.js"></script>
+    <script src="~/admin/assets/js/forms/bootstrap-switch.js"></script>
+    <script src="~/admin/assets/js/forms/bootstrap-maxlength.js"></script>
+}
+@section Styles
+{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.23.0/ui/trumbowyg.min.css" integrity="sha512-iw/TO6rC/bRmSOiXlanoUCVdNrnJBCOufp2s3vhTPyP1Z0CtTSBNbEd5wIo8VJanpONGJSyPOZ5ZRjZ/ojmc7g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.23.0/plugins/colors/ui/trumbowyg.colors.min.css" integrity="sha512-8dXb2ITE13jLrqqGDVTU8kKl9vHZI9E4TpZGyfhevHeF+/cWWA17wVj+SKX3+QHqZISiGihaCOyK3nA152ShDg==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.23.0/plugins/emoji/ui/trumbowyg.emoji.min.css" integrity="sha512-T2q2UM7Pm3t6Fu0VTRcuVMuaQf3/wP1aFi+/NyvpoVV0VBxN1Pqlmq57Jfg1IPRQCfFQOPLKBwoXA28+1gd/Ow==" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="~/admin/assets/css/pages/plugins/select2/select2-bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/admin/assets/css/pages/wizard/wizard-2.css" rel="stylesheet" />
+}

@@ -1,0 +1,73 @@
+﻿@using System.IO;
+@using Microsoft.Extensions.Options
+@using MySite.Entities.Concrete
+@inject IOptions<ReferencesPageInfo> ReferencesPageInfoValue
+@{
+    var referencesPageValue = ReferencesPageInfoValue.Value;
+    ViewBag.Title = referencesPageValue.Title;
+    ViewBag.SeoTitle = referencesPageValue.SeoTitle;
+    ViewBag.SeoDescription = referencesPageValue.SeoDescription;
+    ViewBag.SeoTags = referencesPageValue.SeoTags;
+    ViewBag.SeoAuthor = referencesPageValue.SeoAuthor;
+    Layout = "_Layout";
+
+    string filePath = $"{Directory.GetCurrentDirectory()}{@"\wwwroot\site\img\partner-logo"}";
+    var fileList = Directory.GetFiles(filePath);
+}
+
+<div role="main" class="main">
+
+    <section class="section section-with-shape-divider page-header page-header-modern page-header-lg border-0 my-0 lazyload" data-bg-src="/site/img/theme/background-5.jpg" style="background-size: cover; background-position: center;">
+        <div class="container pb-5 my-3">
+            <div class="row mb-4">
+                <div class="col-md-12 align-self-center p-static order-2 text-center">
+                    <h1 class="font-weight-bold text-color-dark text-10">@ViewBag.Title</h1>
+                </div>
+                <div class="col-md-12 align-self-center order-1">
+                    <ul class="breadcrumb d-block text-center">
+                        <li><a asp-controller="Home" asp-action="Index">Anasayfa</a></li>
+                        <li class="active">@ViewBag.Title</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="shape-divider shape-divider-bottom shape-divider-reverse-x" style="height: 123px;">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1920 123" preserveAspectRatio="xMinYMin">
+                <polygon fill="#F3F3F3" points="0,90 221,60 563,88 931,35 1408,93 1920,41 1920,-1 0,-1 " />
+                <polygon fill="#FFFFFF" points="0,75 219,44 563,72 930,19 1408,77 1920,25 1920,-1 0,-1 " />
+            </svg>
+        </div>
+    </section>
+
+    <section class="section section-height-2 border-0 mt-5 mb-0 pt-5">
+
+        <div class="container py-2">
+            <div class="row mt-3 pb-4">
+                <div class="col text-center">
+                    <h2 class="font-weight-semibold text-6 mb-0">Bu Müşterilerimiz Bizi Seçti!</h2>
+                    <p class="lead text-4 pt-2 font-weight-normal">Kalite güvenin adresidir. Biz ise kaliteden hiçbir zaman ödün vermedik...</p>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                @foreach (var file in fileList)
+                {
+                    FileInfo fileInfo = new FileInfo(file);
+                    <div class="col-6 col-sm-4 col-lg-2">
+                        <div class="featured-boxes featured-boxes-modern-style-2 featured-boxes-modern-style-2-hover-only featured-boxes-modern-style-primary m-0 mb-4 pb-3">
+                            <div class="featured-box featured-box-no-borders featured-box-box-shadow">
+                                <span class="box-content px-1 py-4 text-center d-block">
+                                    <span class="text-primary text-8 position-relative top-3 mt-3">
+                                        <img class="d-inline-block img-fluid" src="~/site/img/partner-logo/@fileInfo.Name" alt="referanslar" style="max-width: 140px;" />
+                                    </span>
+                                    <span class="elements-list-shadow-icon text-default">
+                                        <img class="d-inline-block img-fluid" src="~/site/img/partner-logo/@fileInfo.Name" alt="referanslar" style="max-width: 90px;" />
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+</div>

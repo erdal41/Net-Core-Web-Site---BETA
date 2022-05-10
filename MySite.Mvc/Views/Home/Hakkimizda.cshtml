@@ -1,0 +1,179 @@
+﻿@using System.IO;
+@using Microsoft.Extensions.Options
+@using MySite.Entities.Concrete
+@inject IOptions<AboutUsPageInfo> AboutUsPageValue
+@{
+    var aboutUsPageValue = AboutUsPageValue.Value;
+    ViewBag.Title = aboutUsPageValue.Title;
+    ViewBag.SeoTitle = aboutUsPageValue.SeoTitle;
+    ViewBag.SeoDescription = aboutUsPageValue.SeoDescription;
+    ViewBag.SeoTags = aboutUsPageValue.SeoTags;
+    ViewBag.SeoAuthor = aboutUsPageValue.SeoAuthor;
+    Layout = "_Layout";
+
+    string filePath = $"{Directory.GetCurrentDirectory()}{@"\wwwroot\site\img\partner-logo"}";
+    var fileList = Directory.GetFiles(filePath);
+}
+
+<div role="main" class="main">
+
+    <section class="section section-with-shape-divider page-header page-header-modern page-header-lg border-0 my-0 lazyload" data-bg-src="/site/img/demos/business-consulting-3/backgrounds/background-5.jpg" style="background-size: cover; background-position: center;">
+        <div class="container pb-5 my-3">
+            <div class="row mb-4">
+                <div class="col-md-12 align-self-center p-static order-2 text-center">
+                    <h1 class="font-weight-bold text-color-dark text-10">@ViewBag.Title</h1>
+                </div>
+                <div class="col-md-12 align-self-center order-1">
+                    <ul class="breadcrumb d-block text-center">
+                        <li><a asp-controller="Home" asp-action="Index">Anasayfa</a></li>
+                        <li class="active">@ViewBag.Title</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="shape-divider shape-divider-bottom shape-divider-reverse-x" style="height: 123px;">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1920 123" preserveAspectRatio="xMinYMin">
+                <polygon fill="#F3F3F3" points="0,90 221,60 563,88 931,35 1408,93 1920,41 1920,-1 0,-1 " />
+                <polygon fill="#FFFFFF" points="0,75 219,44 563,72 930,19 1408,77 1920,25 1920,-1 0,-1 " />
+            </svg>
+        </div>
+    </section>
+
+    <div class="container pt-3 mt-4">
+        <div class="row">
+            <div class="col">
+                <h2 class="text-9 text-lg-5 text-xl-9 line-height-3 text-transform-none font-weight-semibold mb-4 mb-lg-3 mb-xl-4 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="250">Projeleriniz için en profesyonel çözümleri sunuyoruz</h2>
+                <p class="text-3-5 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="500">Rafgrup; 5000 m² alanda 50 personeli ile sizlere hizmet vermektedir. Raf sektöründe faaliyet gösteren firmamız, ticari hayatına 2011 yılında başlamıştır. Kuruluşundan itibaren müşterileriyle karşılıklı güvene dayalı uzun vadeli ilişkiler kurmuş, hızla büyümesi ve gelişmesiyle raf sistemleri alanında öncü kuruluşlar arasında yerini almıştır. Sahip olduğu modern ekipmanlar ve kendisine kattığı yeniliklerle sürekli ilerlemeyi hedeflemektedir.</p>
+                <p class="text-3-5 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="750">Rafgrup, bünyesi altında çalışan ve her biri uzun yıllar kendi alanında deneyim ve tecrübe kazanmış mimar,mühendisve teknikerlerden oluşmakta, araştırma geliştirme (AR-GE) bölümü ile iş hacmini genişleterek kendini yenilemekte ve daima bir adım önde olmaktadır.</p>
+                <p class="text-3-5 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="750">Müşteri memnuniyetini ilke edinerek sağladığımız iş çözümlerimiz ve uluslararası standartlara uygun çalışma prensibimiz ile sektörümüzdeki çıtayı yükseltirken gelişen iş hacmimiz müşterilerimize doğru hizmet verdiğimizi göstermektedir.</p>
+                <div class="row row-gutter-sm align-items-center pb-3 mb-5">
+                    <div class="col-lg-6 col-xl-7">
+                        <div class="row flex-xl-nowrap align-items-center mb-4 mb-lg-0">
+                            <div class="col-sm-auto mb-4 mb-sm-0">
+                                <div class="d-flex appear-animation" data-appear-animation="fadeInRightShorter" data-appear-animation-delay="1000">
+                                    <img width="63" src="~/site/img/icons/label.svg" alt="" data-icon data-plugin-options="{'onlySVG': true, 'extraClass': 'd-lg-none d-xl-block'}" />
+                                    <span class="text-3 font-weight-bold text-color-dark pt-2 ml-3">
+                                        <strong class="d-block font-weight-bold text-10 mb-0">240+</strong>
+                                        Satisfied Clients
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-7 col-md-8">
+                                <blockquote class="custom-blockquote-style-1 m-0 pt-1 pb-2 appear-animation" data-appear-animation="fadeInRightShorter" data-appear-animation-delay="1200">
+                                    <p class="mb-0">Ürünlerimiz uluslararası kalite standartlarına uygundur</p>
+                                </blockquote>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-5">
+                        <div class="row row-gutter-sm align-items-center">
+                            <div class="col-auto appear-animation" data-appear-animation="fadeInRightShorter" data-appear-animation-delay="1400">
+                                <a asp-controller="Iletisim" asp-action="Index" class="btn btn-primary custom-btn-style-1 font-weight-semibold btn-px-3 btn-py-2 text-3-5" data-cursor-effect-hover="plus" data-cursor-effect-hover-color="light"><span>Teklif Al</span></a>
+                            </div>
+                            <div class="col-auto appear-animation" data-appear-animation="fadeInRightShorter" data-appear-animation-delay="1600">
+                                <a asp-controller="Iletisim" asp-action="Index" class="btn btn-dark custom-btn-style-1 font-weight-semibold btn-px-3 btn-py-2 text-3-5" data-cursor-effect-hover="plus" data-cursor-effect-hover-color="light"><span>İletişim</span></a>
+                            </div>
+                            <div class="col-auto mt-4 mt-sm-0 appear-animation" data-appear-animation="fadeInRightShorter" data-appear-animation-delay="1800">
+                                <span class="d-flex align-items-center p-0">
+                                    <span>
+                                        <img width="25" src="~/site/img/icons/phone.svg" alt="Telefon Icon" data-icon data-plugin-options="{'onlySVG': true, 'extraClass': 'svg-fill-color-dark'}" />
+                                    </span>
+                                    <a class="text-color-dark text-color-hover-primary text-decoration-none font-weight-semibold text-3 ml-2" href="tel:02163948086">(0216) 394-8086</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row row-gutter-sm">
+            <div class="col-sm-6 mb-4 mb-sm-0">
+                <img src="~/site/img/demos/business-consulting-3/generic/generic-5.jpg" class="img-fluid box-shadow-5 appear-animation" data-appear-animation="fadeInRightShorter" data-appear-animation-delay="800" alt="" />
+            </div>
+            <div class="col-6 col-sm-3">
+                <img src="~/site/img/demos/business-consulting-3/generic/generic-1.jpg" class="img-fluid box-shadow-5 appear-animation" data-appear-animation="fadeInRightShorter" data-appear-animation-delay="600" alt="" />
+            </div>
+            <div class="col-6 col-sm-3">
+                <img src="~/site/img/demos/business-consulting-3/generic/generic-2.jpg" class="img-fluid box-shadow-5 mb-4 appear-animation" data-appear-animation="fadeInRightShorter" data-appear-animation-delay="200" alt="" />
+                <img src="~/site/img/demos/business-consulting-3/generic/generic-3.jpg" class="img-fluid box-shadow-5 appear-animation" data-appear-animation="fadeInRightShorter" data-appear-animation-delay="400" alt="" />
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid pt-5 mt-5 mb-4">
+        <div class="row">
+            <div class="col appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="250">
+                <div class="owl-carousel owl-theme carousel-center-active-item custom-carousel-vertical-center-items custom-dots-style-1" data-plugin-options="{'responsive': {'0': {'items': 1}, '476': {'items': 3}, '768': {'items': 3}, '992': {'items': 5}, '1200': {'items': 5}, '1600': {'items': 7}}, 'autoplay': true, 'autoplayTimeout': 3000, 'dots': true}">
+
+                    @foreach (var file in fileList)
+                    {
+                        FileInfo fileInfo = new FileInfo(file);
+
+                        <div class="text-center">
+                            <img class="d-inline-block img-fluid" src="~/site/img/partner-logo/@fileInfo.Name" alt="referanslar" style="max-width: 90px;" />
+                        </div>
+                    }
+                    @*<div class="text-center">
+                        <img class="d-inline-block img-fluid" src="~/site/img/logos/logo-8.png" alt="" style="max-width: 90px;" />
+                    </div>
+                    <div class="text-center">
+                        <img class="d-inline-block img-fluid" src="~/site/img/logos/logo-9.png" alt="" style="max-width: 140px;" />
+                    </div>
+                    <div class="text-center">
+                        <img class="d-inline-block img-fluid" src="~/site/img/logos/logo-10.png" alt="" style="max-width: 140px;" />
+                    </div>
+                    <div class="text-center">
+                        <img class="d-inline-block img-fluid" src="~/site/img/logos/logo-11.png" alt="" style="max-width: 140px;" />
+                    </div>
+                    <div class="text-center">
+                        <img class="d-inline-block img-fluid" src="~/site/img/logos/logo-12.png" alt="" style="max-width: 100px;" />
+                    </div>
+                    <div class="text-center">
+                        <img class="d-inline-block img-fluid" src="~/site/img/logos/logo-13.png" alt="" style="max-width: 100px;" />
+                    </div>
+                    <div class="text-center">
+                        <img class="d-inline-block img-fluid" src="~/site/img/logos/logo-14.png" alt="" style="max-width: 140px;" />
+                    </div>
+                    <div class="text-center">
+                        <img class="d-inline-block img-fluid" src="~/site/img/logos/logo-15.png" alt="" style="max-width: 110px;" />
+                    </div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container py-5 mb-5">
+        <div class="row">
+            <div class="col">
+
+                <div class="tabs tabs-bottom tabs-center tabs-simple custom-tabs-style-1">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#tabsNavigationVision" data-toggle="tab">Vizyonumuz</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#tabsNavigationMission" data-toggle="tab">Misyonumuz</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tabsNavigationVision">
+                            <div class="text-center">
+                                <p class="text-3-5">
+                                    Kurumsal firmamız yenilikçi ve yaratıcı çözümleri ile müşterilerimize en üst düzeyde değerler yaratarak pazarda lider olmaktır.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tabsNavigationMission">
+                            <div class="text-center">
+                                <p class="text-3-5">
+                                    Firmamız depolama alanlarında doğru tespitler yaparak depolanacak malzemeye,kullanılacak istif araçlarına ve malzemelerin sirkülasyonuna göre raf sistemi oluşturularak doğru çözümler üretmektedir.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

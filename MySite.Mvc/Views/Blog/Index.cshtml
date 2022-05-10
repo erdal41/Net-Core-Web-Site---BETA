@@ -1,0 +1,157 @@
+﻿@using System.Text.RegularExpressions
+@using MySite.Mvc.Helpers.Concrete
+@model MySite.Entities.Dtos.ArticleListDto
+@{ ViewBag.Title = "Blog";
+    Layout = "_Layout";
+    Regex regex = new Regex("<[^>]*>"); }
+
+
+<div role="main" class="main">
+
+    <section class="section section-with-shape-divider page-header page-header-modern page-header-lg border-0 my-0 lazyload" data-bg-src="/site/img/demos/business-consulting-3/backgrounds/background-5.jpg" style="background-size: cover; background-position: center;">
+        <div class="container pb-5 my-3">
+            <div class="row mb-4">
+                <div class="col-md-12 align-self-center p-static order-2 text-center">
+                    <h1 class="font-weight-bold text-color-dark text-10">@ViewBag.Title</h1><br /><br />
+                    <p>Burada blog yazılarımızdan daha fazla bilgi edinebilir ve destek alabilirsiniz.</p>
+                </div>
+                <div class="col-md-12 align-self-center order-1">
+                    <ul class="breadcrumb d-block text-center">
+                        <li><a asp-controller="Home" asp-action="Index">Anasayfa</a></li>
+                        <li class="active">@ViewBag.Title</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="shape-divider shape-divider-bottom shape-divider-reverse-x" style="height: 123px;">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1920 123" preserveAspectRatio="xMinYMin">
+                <polygon fill="#F3F3F3" points="0,90 221,60 563,88 931,35 1408,93 1920,41 1920,-1 0,-1 " />
+                <polygon fill="#FFFFFF" points="0,75 219,44 563,72 930,19 1408,77 1920,25 1920,-1 0,-1 " />
+            </svg>
+        </div>
+    </section>
+
+    <div class="container pt-4 pb-5 my-5">
+        <div class="row">
+            <div class="col-lg-8 mb-5 mb-lg-0 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="1600">
+                <form>
+                    <div class="form-row">
+                        <input type="hidden" id="category-id" value="@(Model.CategoryId!=null?Model.CategoryId.Value:null)" />
+                        <input type="hidden" id="current-page" value="@Model.CurrentPage" />
+                        <div class="form-group col-md-6">
+                            <select class="form-control" id="select-page-size">
+                                <option selected="@(Model.PageSize == 5 ? "selected" : null)" value="5">5</option>
+                                <option selected="@(Model.PageSize == 10 ? "selected" : null)" value="10">10</option>
+                                <option selected="@(Model.PageSize == 20 ? "selected" : null)" value="20">20</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <select class="form-control" id="select-is-ascending">
+                                <option selected="@(Model.IsAscending == false ? "selected" : null)" value="false">En Yeni</option>
+                                <option selected="@(Model.IsAscending ? "selected" : null)" value="true">En Eski</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+                @foreach (var article in Model.Articles)
+                {
+        <article class="mb-5">
+            <div class="card bg-transparent border-0 custom-border-radius-1">
+                <div class="card-body p-0 z-index-1">
+                    <a href="/@Url.FriendlyURLTitle(article.Title)-@article.Id" data-cursor-effect-hover="plus">
+                        <img class="card-img-top custom-border-radius-1 mb-2" src="~/admin/assets/img/@article.Picture" alt="@article.Title">
+                    </a>
+                    <p class="text-uppercase text-color-default text-1 my-2">
+                        <time pubdate datetime="2021-01-10">@article.ModifiedDate</time>
+                        <span class="opacity-3 d-inline-block px-2">|</span>
+                        @article.CommentCount
+                        <span class="opacity-3 d-inline-block px-2">|</span>
+                        @article.ModifiedByName
+                    </p>
+                    <div class="card-body p-0">
+                        <h4 class="card-title text-5 font-weight-bold pb-1 mb-2"><a href="/@Url.FriendlyURLTitle(article.Title)-@article.Id" class="text-color-dark text-color-hover-primary text-decoration-none">@article.Title</a></h4>
+                        <p class="card-text mb-2">
+                            @{ article.Content = regex.Replace(article.Content, ""); }
+                            @(article.Content.Length>250 ? article.Content.Substring(0,250) : article.Content)
+                        </p>
+                        <a href="/@Url.FriendlyURLTitle(article.Title)-@article.Id" class="text-decoration-none custom-link-hover-effects">
+                            <span class="custom-view-more d-inline-flex font-weight-medium text-color-primary">
+                                Daha fazla oku
+                                <img width="27" src="~/site/img/icons/arrow-right.svg" alt="" data-icon data-plugin-options="{'onlySVG': true, 'extraClass': 'svg-fill-color-primary ml-2'}" style="width: 27px;" />
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </article>}
+                <!-- Pagination -->
+                <ul class="pagination justify-content-center mb-4">
+                    @{
+                                    @if (Model.ShowPrevious)
+                                    {
+                        @if (Model.CategoryId != null)
+                        {
+        <li class="page-item">
+            <a class="page-link" asp-route-currentPage="@(Model.CurrentPage-1)" asp-route-isAscending="@Model.IsAscending" asp-route-pageSize="@Model.PageSize" asp-route-categoryId="@Model.CategoryId.Value">Önceki</a>
+        </li> }
+                        else
+                        {
+        <li class="page-item">
+            <a class="page-link" asp-route-currentPage="@(Model.CurrentPage-1)" asp-route-isAscending="@Model.IsAscending" asp-route-pageSize="@Model.PageSize">Önceki</a>
+        </li>}}
+                                                @for (var i = 1; i <= Model.TotalPages; i++)
+                                                {
+                                    <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                                        @if (Model.CategoryId != null)
+                                        {
+                        <a class="page-link" asp-route-currentPage="@i" asp-route-categoryId="@Model.CategoryId.Value" asp-route-isAscending="@Model.IsAscending" asp-route-pageSize="@Model.PageSize">@i</a> }
+                    else
+                    {
+
+        <a class="page-link" asp-route-currentPage="@i" asp-route-isAscending="@Model.IsAscending" asp-route-pageSize="@Model.PageSize">@i</a>}
+                                    </li>}
+                                                            @if (Model.ShowNext)
+                                                            {
+                                                @if (Model.CategoryId != null)
+                                                {
+                                <li class="page-item">
+                                    <a class="page-link" asp-route-currentPage="@(Model.CurrentPage+1)" asp-route-isAscending="@Model.IsAscending" asp-route-pageSize="@Model.PageSize" asp-route-categoryId="@Model.CategoryId.Value">Sonraki</a>
+                                </li> }
+                                                else
+                                                {
+                                <li class="page-item">
+                                    <a class="page-link" asp-route-currentPage="@(Model.CurrentPage+1)" asp-route-isAscending="@Model.IsAscending" asp-route-pageSize="@Model.PageSize">Sonraki</a>
+                                </li>}} }
+                </ul>
+            </div>
+            @await Component.InvokeAsync("RightSideBar")
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+
+            $(function () {
+
+                const selectPageSize = $('#select-page-size');
+                const selectIsAscending = $('#select-is-ascending');
+                const categoryId = $('#category-id').val();
+                const currentPage = $('#current-page').val();
+                const categoryQuery = categoryId !== null ? `&categoryId=${categoryId}` : null;
+
+                selectPageSize.on('change',
+                    function () {
+                        window.location =
+                            `/?pageSize=${selectPageSize.val()}&isAscending=${selectIsAscending.val()}${categoryQuery != null ? categoryQuery : null}&currentPage=${currentPage}`;
+                    });
+                selectIsAscending.on('change',
+                    function () {
+                        window.location =
+                            `/?pageSize=${selectPageSize.val()}&isAscending=${selectIsAscending.val()}${categoryQuery != null ? categoryQuery : null}&currentPage=${currentPage}`;
+                    });
+            });
+        });
+    </script>
+}

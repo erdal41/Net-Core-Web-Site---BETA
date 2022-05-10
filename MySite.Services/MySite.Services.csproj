@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MySite.Data\MySite.Data.csproj" />
+    <ProjectReference Include="..\MySite.Entities\MySite.Entities.csproj" />
+    <ProjectReference Include="..\MySite.Shared\MySite.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

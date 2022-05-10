@@ -1,0 +1,144 @@
+﻿@model MySite.Entities.Dtos.UploadUpdateDto
+@{
+    #region Size Convert
+    long size = Model.Size;
+    string sizeConvert = "";
+
+    if (size >= 1024)
+    {
+        sizeConvert += (size / 1024) + " KB";
+    }
+    else if (size >= 1048576)
+    {
+        sizeConvert += (size / 1048576) + " MB";
+    }
+    else if (size > 1073741824)
+    {
+        sizeConvert += (size / 1073741824) + " GB";
+    }
+    else
+    {
+        sizeConvert += size + " Bayt";
+    }
+    #endregion
+}
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title">
+                    <span class="svg-icon svg-icon-md">
+                        <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-03-11-144509/theme/html/demo1/dist/../src/media/svg/icons/Design/Edit.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect x="0" y="0" width="24" height="24" />
+                                <path d="M8,17.9148182 L8,5.96685884 C8,5.56391781 8.16211443,5.17792052 8.44982609,4.89581508 L10.965708,2.42895648 C11.5426798,1.86322723 12.4640974,1.85620921 13.0496196,2.41308426 L15.5337377,4.77566479 C15.8314604,5.0588212 16,5.45170806 16,5.86258077 L16,17.9148182 C16,18.7432453 15.3284271,19.4148182 14.5,19.4148182 L9.5,19.4148182 C8.67157288,19.4148182 8,18.7432453 8,17.9148182 Z" fill="#000000" fill-rule="nonzero" transform="translate(12.000000, 10.707409) rotate(-135.000000) translate(-12.000000, -10.707409) " />
+                                <rect fill="#000000" opacity="0.3" x="5" y="20" width="15" height="2" rx="1" />
+                            </g>
+                        </svg><!--end::Svg Icon-->
+                    </span>Dosyayı Düzenle
+                </h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="İptal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-md-7" style="        border-right: 1px solid #afafaf;display: flex;align-items: center;flex-wrap: wrap;">
+                        <img src="~/admin/assets/img/@Model.FileName" class="img-fluid mx-auto d-block" alt="@Model.AltText" title="@Model.Title">
+                    </div>
+                    <div class="col-md-5">
+
+                        <span><b>Yüklenen Tarih: </b></span>
+                        <span>@Model.CreatedDate</span><br />
+                        <span><b>Yükleyen Kullanıcı: </b></span>
+                        <span>@Model.CreatedByName</span><br />
+                        <span><b>Dosya Adı: </b></span>
+                        <span>@Model.FileName</span><br />
+                        <span><b>Dosya Türü: </b></span>
+                        <span>@Model.ContentType</span><br />
+                        <span><b>Dosya Boyutu: </b></span>
+                        <span>@sizeConvert</span><br />
+                        <hr />
+                        <form asp-action="Duzenle" id="form-upload-update">
+                            <input name="IsValid" type="hidden" value="@ViewData.ModelState.IsValid.ToString()" />
+                            <div asp-validation-summary="All" class="text-danger" id="validation-summary" aria-hidden="true" style="display: none;"></div>
+                            <input type="hidden" asp-for="Id" />
+                            <input type="hidden" asp-for="CreatedDate" />
+                            <input type="hidden" asp-for="CreatedByName" />
+                            <input type="hidden" asp-for="FileName" />
+                            <input type="hidden" asp-for="ContentType" />
+                            <input type="hidden" asp-for="Size" />
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label" asp-for="AltText"></label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" asp-for="AltText" />
+                                    <span class="text-danger" asp-validation-for="AltText"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label" asp-for="Title"></label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" asp-for="Title" />
+                                    <span class="text-danger" asp-validation-for="Title"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label" asp-for="SubTitle"></label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" asp-for="SubTitle" />
+                                    <span class="text-danger" asp-validation-for="SubTitle"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label" asp-for="Note"></label>
+                                <div class="col-md-8">
+                                    <textarea class="form-control" asp-for="Note"></textarea>
+                                    <span class="text-danger" asp-validation-for="Note"></span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="btnSil" data-id="@Model.Id">
+                    <span class="svg-icon svg-icon-md">
+                        <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-03-30-161050/theme/html/demo1/dist/../src/media/svg/icons/Home/Trash.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect x="0" y="0" width="24" height="24" />
+                                <path d="M6,8 L18,8 L17.106535,19.6150447 C17.04642,20.3965405 16.3947578,21 15.6109533,21 L8.38904671,21 C7.60524225,21 6.95358004,20.3965405 6.89346498,19.6150447 L6,8 Z M8,10 L8.45438229,14.0894406 L15.5517885,14.0339036 L16,10 L8,10 Z" fill="#000000" fill-rule="nonzero" />
+                                <path d="M14,4.5 L14,3.5 C14,3.22385763 13.7761424,3 13.5,3 L10.5,3 C10.2238576,3 10,3.22385763 10,3.5 L10,4.5 L5.5,4.5 C5.22385763,4.5 5,4.72385763 5,5 L5,5.5 C5,5.77614237 5.22385763,6 5.5,6 L18.5,6 C18.7761424,6 19,5.77614237 19,5.5 L19,5 C19,4.72385763 18.7761424,4.5 18.5,4.5 L14,4.5 Z" fill="#000000" opacity="0.3" />
+                            </g>
+                        </svg><!--end::Svg Icon-->
+                    </span>Kalıcı Olarak Sil
+                </button>
+                <div class="col-md-3">
+                    <button type="button" class="btn btn-secondary font-weight-bolder mr-3" data-dismiss="modal">
+                        <span class="svg-icon svg-icon-md">
+                            <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-03-11-144509/theme/html/demo1/dist/../src/media/svg/icons/Navigation/Close.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g transform="translate(12.000000, 12.000000) rotate(-45.000000) translate(-12.000000, -12.000000) translate(4.000000, 4.000000)" fill="#000000">
+                                        <rect x="0" y="7" width="16" height="2" rx="1" />
+                                        <rect opacity="0.3" transform="translate(8.000000, 8.000000) rotate(-270.000000) translate(-8.000000, -8.000000) " x="0" y="7" width="16" height="2" rx="1" />
+                                    </g>
+                                </g>
+                            </svg><!--end::Svg Icon-->
+                        </span>İptal
+                    </button>
+                    <button type="button" class="btn btn-primary font-weight-bolder" id="btnKaydet">
+                        <span class="svg-icon svg-icon-md">
+                            <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-03-11-144509/theme/html/demo1/dist/../src/media/svg/icons/General/Save.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <polygon points="0 0 24 0 24 24 0 24" />
+                                    <path d="M17,4 L6,4 C4.79111111,4 4,4.7 4,6 L4,18 C4,19.3 4.79111111,20 6,20 L18,20 C19.2,20 20,19.3 20,18 L20,7.20710678 C20,7.07449854 19.9473216,6.94732158 19.8535534,6.85355339 L17,4 Z M17,11 L7,11 L7,4 L17,4 L17,11 Z" fill="#000000" fill-rule="nonzero" />
+                                    <rect fill="#000000" opacity="0.3" x="12" y="4" width="3" height="5" rx="0.5" />
+                                </g>
+                            </svg><!--end::Svg Icon-->
+                        </span>Kaydet
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

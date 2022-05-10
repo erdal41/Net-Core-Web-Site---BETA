@@ -1,0 +1,156 @@
+﻿@model MySite.Mvc.Areas.Admin.Models.ArticleAddViewModel
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Makale Ekle";
+}
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+
+    <div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
+        <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+            <!--begin::Info-->
+            <div class="d-flex align-items-center flex-wrap mr-1">
+                <!--begin::Page Heading-->
+                <div class="d-flex align-items-baseline flex-wrap mr-5">
+                    <!--begin::Page Title-->
+                    <h1 class="text-dark font-weight-bold my-1 mr-5">@ViewBag.Title</h1>
+                    <!--end::Page Title-->
+                    <!--begin::Breadcrumb-->
+                    <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+                        <li class="breadcrumb-item text-muted">
+                            <a asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a>
+                        </li>
+                        <li class="breadcrumb-item text-muted">
+                            <a asp-area="Admin" asp-controller="Makale" asp-action="Index">Makaleler</a>
+                        </li>
+                        <li class="breadcrumb-item text-muted">
+                            <a asp-area="Admin" asp-controller="Makale" asp-action="Ekle">@ViewBag.Title</a>
+                        </li>
+                    </ul>
+                    <!--end::Breadcrumb-->
+                </div>
+                <!--end::Page Heading-->
+            </div>
+            <!--end::Info-->
+        </div>
+    </div>
+
+    <div class="d-flex flex-column-fluid">
+        <div class="container">
+            <div class="row">
+                <form asp-controller="Makale" asp-action="Ekle" method="post" enctype="multipart/form-data">
+                    <div class="row mt-2">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div id="modalUploadList" aria-hidden="true"></div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control kt_maxlength" placeholder="Makale Başlığı" asp-for="Title" />
+                                        <span asp-validation-for="Title" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea id="text-editor" class="form-control" asp-for="Content"></textarea>
+                                        <span asp-validation-for="Content" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    Temel Ayarlar
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="categoryList" asp-for="CategoryId"></label>
+                                        <select id="categoryList" class="form-control" asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories,"Id","Name"))">
+                                            <option></option>
+                                        </select>
+                                        <span asp-validation-for="CategoryId" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="CreatedDate"></label>
+                                        <input type="datetime-local" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-ddThh:mm")" asp-for="CreatedDate" />
+                                        <span asp-validation-for="CreatedDate" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-3 col-form-label">Durum</label>
+                                        <div class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-on bootstrap-switch-animate" style="width: 194px;">
+                                            <div class="bootstrap-switch-container" style="width: 288px; margin-left: 0px;">
+                                                <input data-switch="true" type="checkbox" id="isActive" asp-for="IsActive" data-on-text="Yayında" data-handle-width="70" data-off-text="Taslak" data-on-color="primary">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="image-input image-input-outline" style="width: 100%; height: auto;" id="kt_image_1">
+                                            <div class="image-input-wrapper" style="width: 100%; height: 200px;"></div>
+                                            <label id="uploadChoose" class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="Resim Ekle / Değiştir" data-original-title="Resim Ekle / Değiştir">
+                                                <i class="fa fa-pen icon-sm te xt-muted"></i>
+                                            </label>
+                                            <span id="uploadRemove" class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow position-absolute" style="right:-10px;bottom:-10px;" data-toggle="tooltip" title="Resmi Kaldır" data-original-title="Resmi Kaldır">
+                                                <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                            </span>
+                                            <input type="text" class="form-control" asp-for="Picture" hidden="hidden" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-block mt-4">Kaydet</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-2">
+                            <div class="card">
+                                <div class="card-header">
+                                    SEO Optimizasyonu
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="seoWriter" asp-for="SeoAuthor"></label>
+                                            <input type="text" id="seoWriter" class="form-control kt_maxlength" asp-for="SeoAuthor" />
+                                            <span asp-validation-for="SeoAuthor" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="seoTags" asp-for="SeoTags"></label>
+                                            <input type="text" id="seoTags" class="form-control kt_maxlength" asp-for="SeoTags" />
+                                            <span asp-validation-for="SeoTags" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label for="seoDescription" asp-for="SeoDescription"></label>
+                                            <textarea id="seoDescription" class="form-control kt_maxlength" asp-for="SeoDescription"></textarea>
+                                            <span asp-validation-for="SeoDescription" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.23.0/trumbowyg.min.js" integrity="sha512-sffB9/tXFFTwradcJHhojkhmrCj0hWeaz8M05Aaap5/vlYBfLx5Y7woKi6y0NrqVNgben6OIANTGGlojPTQGEw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.23.0/langs/tr.min.js" integrity="sha512-+HGzdrYvtA0U9cp5kJad8OpjTvUi6ywZ9z9kXFGiV3EaAR1II5X6lfulUm6/F9GKesHW+jHFfAqwXK0juybvMw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.23.0/plugins/colors/trumbowyg.colors.min.js" integrity="sha512-iT7g30i1//3OBZsfoc5XmlULnKQKyxir582Z9fIFWI6+ohfrTdns118QYhCTt0d09aRGcE7IRvCFjw2wngaqRQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.23.0/plugins/emoji/trumbowyg.emoji.min.js" integrity="sha512-C1y8Ma4rukPZAgoB+9AWiKNMWXvWXGDygpcYuL/lM3YKUcZLUgFwF8brKYML73a5YeZ4y7hmY3604Tzx4f4k0Q==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.23.0/plugins/fontfamily/trumbowyg.fontfamily.min.js" integrity="sha512-tDDpWlhruXFSzPin7PeSOo/ZklJv354ZUibgoTnthgO9lQUiNn4etCFGNwT4c3WUCZ1jWZgOVrXGMqiApe9sBg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.23.0/plugins/fontsize/trumbowyg.fontsize.min.js" integrity="sha512-DOJaq3OCe5hLSr73aQBMiJY4kc+L5UwessOl6g2oxyy7VDnZVWt+TgWVy2nh2ypf7bwoaxZmPnIMiRC5PNZecA==" crossorigin="anonymous"></script>
+    @*<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous"></script>
+
+    <script src="~/admin/assets/js/custom/article/article-add.js"></script>
+    <script src="~/admin/assets/js/forms/select2.js"></script>
+    <script src="~/admin/assets/js/forms/bootstrap-switch.js"></script>
+    <script src="~/admin/assets/js/forms/bootstrap-maxlength.js"></script>
+}
+@section Styles
+{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.23.0/ui/trumbowyg.min.css" integrity="sha512-iw/TO6rC/bRmSOiXlanoUCVdNrnJBCOufp2s3vhTPyP1Z0CtTSBNbEd5wIo8VJanpONGJSyPOZ5ZRjZ/ojmc7g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.23.0/plugins/colors/ui/trumbowyg.colors.min.css" integrity="sha512-8dXb2ITE13jLrqqGDVTU8kKl9vHZI9E4TpZGyfhevHeF+/cWWA17wVj+SKX3+QHqZISiGihaCOyK3nA152ShDg==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.23.0/plugins/emoji/ui/trumbowyg.emoji.min.css" integrity="sha512-T2q2UM7Pm3t6Fu0VTRcuVMuaQf3/wP1aFi+/NyvpoVV0VBxN1Pqlmq57Jfg1IPRQCfFQOPLKBwoXA28+1gd/Ow==" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="~/admin/assets/css/pages/plugins/select2/select2-bootstrap4.min.css" rel="stylesheet" />
+}

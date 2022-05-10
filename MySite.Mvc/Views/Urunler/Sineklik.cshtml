@@ -1,0 +1,72 @@
+﻿@using System.IO;
+@{
+    ViewBag.Title = "Sineklik";
+    ViewBag.SeoTitle = "Sineklik - Marka Adı";
+    ViewBag.SeoDescription = "Bu bir Sineklik sayfasıdır.";
+    ViewBag.SeoTags = "Sineklik";
+    ViewBag.SeoAuthor = "admin";
+    Layout = "_Layout";
+
+    string filePath = $"{Directory.GetCurrentDirectory()}{@"\wwwroot\site\img\products\cam-balkon"}";
+    var fileList = Directory.GetFiles(filePath);
+}
+
+<div role="main" class="main">
+
+    <section class="section section-with-shape-divider page-header page-header-modern page-header-lg border-0 my-0 lazyload" data-bg-src="/site/img/theme/background-5.jpg" style="background-size: cover; background-position: center;">
+        <div class="container pb-5 my-3">
+            <div class="row mb-4">
+                <div class="col-md-12 align-self-center p-static order-2 text-center">
+                    <h1 class="font-weight-bold text-color-dark text-10">@ViewBag.Title</h1>
+                </div>
+                <div class="col-md-12 align-self-center order-1">
+                    <ul class="breadcrumb d-block text-center">
+                        <li><a asp-controller="Home" asp-action="Index">Anasayfa</a></li>
+                        <li class="active">@ViewBag.Title</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="shape-divider shape-divider-bottom shape-divider-reverse-x" style="height: 123px;">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1920 123" preserveAspectRatio="xMinYMin">
+                <polygon fill="#F3F3F3" points="0,90 221,60 563,88 931,35 1408,93 1920,41 1920,-1 0,-1 " />
+                <polygon fill="#FFFFFF" points="0,75 219,44 563,72 930,19 1408,77 1920,25 1920,-1 0,-1 " />
+            </svg>
+        </div>
+    </section>
+
+    <div class="container py-4">
+        <p class="lead text-4 pt-2 font-weight-normal">Cam balkon hem evinize tasarım hem de eviniz için az da olsa yalıtım seçeneği sunar. Kış aylarında fazla soğuk geçirmeyerek evin sıcaklığını korumaktadır.</p>
+
+        <div class="row mt-3 pb-4">
+            <div class="col">
+                <h2 class="font-weight-semibold text-6 mb-0">Cam Balkon Resimleri</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" style="min-height: 250px;">
+
+                <div class="row portfolio-list lightbox" data-plugin-options="{'delegate': 'a.lightbox-portfolio', 'type': 'image', 'gallery': {'enabled': true}}">
+                    @foreach (var file in fileList)
+                    {
+                        FileInfo fileInfo = new FileInfo(file);
+                        <div class="col-12 col-sm-6 col-lg-3 appear-animation animated expandIn appear-animation-visible" data-appear-animation="expandIn" data-appear-animation-delay="200" style="animation-delay: 200ms;">
+                            <div class="portfolio-item">
+                                <span class="thumb-info thumb-info-lighten thumb-info-centered-icons border-radius-0">
+                                    <span class="thumb-info-wrapper border-radius-0">
+                                        <img src="~/site/img/products/cam-balkon/@fileInfo.Name" class="img-fluid border-radius-0" alt="">
+                                        <span class="thumb-info-action">
+                                            <a href="~/site/img/products/cam-balkon/@fileInfo.Name" class="lightbox-portfolio">
+                                                <span class="thumb-info-action-icon thumb-info-action-icon-light"><i class="fas fa-search text-dark"></i></span>
+                                            </a>
+                                        </span>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
